@@ -7,15 +7,16 @@
     <style>
         /* CSS for the navigation bar */
         .navbox {
-            background-color: red;
-            overflow: hidden;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: flex-end; /* Default to right alignment */
-        }
+    background-color: red;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end; /* Default to right alignment */
+    z-index: 1000; /* Add this line to ensure nav stays above other content */
+}
         
         .navbox a {
             color: white;
@@ -32,9 +33,18 @@
         
         /* Center nav links on mobile/tablet */
         @media (max-width: 768px) {
-            .navbox {
-                justify-content: center;
-            }
+           /* Center nav links on mobile/tablet */
+@media (max-width: 768px) {
+    .navbox {
+        justify-content: center;
+        flex-wrap: wrap; /* Allow links to wrap on small screens */
+    }
+    
+    .navbox a {
+        padding: 10px 12px; /* Slightly smaller padding */
+        font-size: 15px; /* Slightly smaller font */
+    }
+}
         }
         
         /* Rest of your existing CSS remains unchanged */
