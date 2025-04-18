@@ -307,19 +307,33 @@
       }
 
       .nav-box {
-        flex-direction: column;
-        padding: 10px 15px;
-        gap: 10px;
-      }
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+  }
+  .nav-box > div {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
       .nav-box a:hover {
             background-color: #ddd;
             color: black;
         }
 
-      .nav-box a {
-        margin-left: 10px;
-        font-size: 0.95rem;
-      }
+        .nav-box a {
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    text-align: center;
+    flex: 1 0 auto;
+    min-width: 120px;
+    box-sizing: border-box;
+  }
 
       .main-content {
         padding: 0 20px;
