@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* Base Styles (Mobile First) */
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .top-border {
+            width: 100%;
+            background-color: #e61d1d;
+            display: flex;
+            justify-content: center; /* Center by default (mobile) */
+            align-items: center;
+            height: auto;
+            position: relative;
+            z-index: 1;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .top-border a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 10px;
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+        }
+
+        .top-border a:hover {
+            color: black;
+        }
+
+        .content {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, p {
+            color: white;
+            text-align: center;
+        }
+
+        /* Info Content Styles */
+        .info-content {
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .info-heading {
+            color: #e61d1d;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e61d1d;
+            padding-bottom: 5px;
+        }
+
+        .info-list {
+            list-style-type: none;
+            padding: 0;
+            color: white;
+        }
+
+        .info-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .info-list li:before {
+            content: "•";
+            color: #e61d1d;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Floating icons styles */
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-icon {
+            position: absolute;
+            animation: float linear infinite;
+            user-select: none;
+            opacity: 0.2;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(360deg);
+            }
+        }
+
+        /* Tablet Styles (min-width: 600px) */
+        @media (min-width: 600px) {
+            .top-border {
+                height: 50px;
+                padding: 0;
+                flex-wrap: nowrap;
+            }
+
+            .top-border a {
+                margin: 0 20px;
+                font-size: 1.1rem;
+            }
+
+            .floating-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Desktop Styles (min-width: 900px) */
+        @media (min-width: 900px) {
+            .top-border {
+                justify-content: flex-end; /* Align nav to right on desktop */
+                padding-right: 50px;
+            }
+
+            .top-border a {
+                margin: 0 25px;
+                font-size: 1.2rem;
+            }
+
+            .content {
+                padding: 40px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .floating-icon {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-icons" id="floatingIcons"></div>
+    <div class="top-border">
+        <a href="./PZNStudios.html">Home</a>
+        <a href="./OurProjects.html">Projects</a>
+        <a href="./OurWebsiteTemplate.html">WebTemplate</a>
+        <a href="./AboutUs.html">About Us</a>
+        
+        <a href="./public/Contact.html">Contact</a>
+    </div>
+    <div class="content">
+        <h1>About Us!</h1>
+        <p style="font-family:cursive;">
+            Welcome to our creative studio where innovation meets passion! We are a multidisciplinary team specializing in Android development, website creation, and anime-inspired fashion.
+            <br><br><br>
+            <strong>Our Services:</strong><br><br>
+            - Custom Android app development tailored to your needs.<br>
+            - Beautiful, responsive website design and development.<br>
+            - Unique anime-themed clothing brand with high-quality merchandise.
+            <br><br>
+            <strong>Our Mission:</strong><br><br>
+            To blend technology and creativity, delivering exceptional digital solutions while spreading our love for anime culture through fashion.
+            <br><br>
+            <strong>Our Vision:</strong><br><br>
+            To become a recognized name in both the tech and fashion industries, known for our innovative approach and distinctive style that bridges the digital and physical worlds.
+        </p>
+    </div>
+    <div class="info-content">
+        <div class="info-column">
+            <h3 class="info-heading">Our Services</h3>
+            <ul class="info-list">
+                <li>Website Development</li>
+                <li>Android App Development</li>
+                <li>Clothing Brand Design</li>
+            </ul>
+        </div>
+        
+        <div class="info-column">
+            <h3 class="info-heading">Contact Us</h3>
+            <ul class="info-list">
+                <li>Phone: 9398907446</li>
+                <li>Email: basireddykarthik551@gmail.com</li>
+                <li>Address: Sanjana'sCourtyard, Kandlakoya, medchal</li>
+                <li>Hours: Mon-Fri 10AM-6PM</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Array of your image paths (replace with your actual image paths)
+        const iconImages = [
+            'logo.png',
+            'logo.png',
+            'logo.png',
+            'logo.png',
+            'logo.png',
+        ];
+        
+        // Determine number of icons based on screen size
+        function getIconCount() {
+            if (window.innerWidth < 600) return 10; // Mobile
+            if (window.innerWidth < 900) return 15; // Tablet
+            return 20; // Desktop
+        }
+        
+        // Create floating icons
+        function createIcons() {
+            const container = document.getElementById('floatingIcons');
+            container.innerHTML = ''; // Clear existing icons
+            
+            const count = getIconCount();
+            
+            for (let i = 0; i < count; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'floating-icon';
+                
+                // Use a random image from your collection
+                const randomImage = iconImages[Math.floor(Math.random() * iconImages.length)];
+                icon.style.backgroundImage = `url('${randomImage}')`;
+                
+                // Random position and animation
+                const leftPos = Math.random() * 100;
+                const animDuration = 15 + Math.random() * 25; // 15-40 seconds
+                const delay = Math.random() * 20; // Start at different times
+                const size = window.innerWidth < 600 ? 
+                    (20 + Math.random() * 20) : 
+                    (30 + Math.random() * 30);
+                const rotation = Math.random() * 360;
+                
+                icon.style.left = `${leftPos}%`;
+                icon.style.animationDuration = `${animDuration}s`;
+                icon.style.animationDelay = `-${delay}s`;
+                icon.style.width = `${size}px`;
+                icon.style.height = `${size}px`;
+                icon.style.opacity = `${0.1 + Math.random() * 0.2}`; // Random opacity
+                icon.style.transform = `rotate(${rotation}deg)`;
+                
+                container.appendChild(icon);
+            }
+        }
+        
+        // Initial creation
+        createIcons();
+        
+        // Recreate on resize
+        window.addEventListener('resize', createIcons);
+    </script>
+</body>
+</html>

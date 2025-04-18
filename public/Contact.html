@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        .forgot-password a {
+            color: #4285f4;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .switch-form a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div id="login-form">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#" id="forgot-password-link">Forgot Password?</a>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div class="switch-form">
+                Don't have an account? <a href="#" id="show-register">Register</a>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="register-form" class="hidden">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Phone Number</label>
+                    <input type="tel" id="register-phone" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <div class="switch-form">
+                Already have an account? <a href="#" id="show-login">Login</a>
+            </div>
+        </div>
+    
+
+        <!-- Forgot Password Form -->
+        <div id="forgot-password-form" class="hidden">
+            <h2>Forgot Password</h2>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="forgot-email">Email</label>
+                    <input type="email" id="forgot-email" required>
+                </div>
+                <button type="submit">Reset Password</button>
+            </form>
+            <div class="switch-form">
+                Remember your password? <a href="#" id="show-login-from-forgot">Login</a>
+            </div>
+        </div>
+    </div>
+    <!-- OTP Verification Form -->
+    <div id="otp-form" class="hidden">
+        <h2>Verify OTP</h2>
+        <form id="otpForm">
+            <div class="form-group">
+                <label for="otp-code">Enter OTP</label>
+                <input type="text" id="otp-code" required maxlength="6">
+            </div>
+            <button type="submit">Verify</button>
+        </form>
+        <div class="switch-form">
+            Didn't receive OTP? <a href="#" id="resend-otp">Resend</a>
+        </div>
+    </div>
+    <script>
+        // Form switching
+        // Existing form switching code
+    document.getElementById('show-register').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('register-form').classList.remove('hidden');
+        document.getElementById('forgot-password-form').classList.add('hidden');
+    });
+
+    document.getElementById('show-login').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('register-form').classList.add('hidden');
+        document.getElementById('forgot-password-form').classList.add('hidden');
+    });
+
+    document.getElementById('forgot-password-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('register-form').classList.add('hidden');
+        document.getElementById('forgot-password-form').classList.remove('hidden');
+    });
+
+    document.getElementById('show-login-from-forgot').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('register-form').classList.add('hidden');
+        document.getElementById('forgot-password-form').classList.add('hidden');
+    });
+
+    // NEW CODE GOES HERE - Update existing form switches to include OTP form
+    // Update all existing form switches to hide OTP form
+    const formSwitches = [
+        'show-register', 
+        'show-login', 
+        'forgot-password-link', 
+        'show-login-from-forgot'
+    ];
+    
+    formSwitches.forEach(id => {
+        document.getElementById(id).addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('otp-form').classList.add('hidden');
+        });
+    });
+
+    // OTP Form handling
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('register-email').value;
+        const otp = document.getElementById('otp-code').value;
+        
+        fetch('/api/verify-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, otp }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('OTP verified successfully! You can now login.');
+                document.getElementById('login-form').classList.remove('hidden');
+                document.getElementById('otp-form').classList.add('hidden');
+            } else {
+                alert('OTP verification failed: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred during OTP verification');
+        });
+    });
+
+    // Modify register form submission to show OTP form
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        const phone = document.getElementById('register-phone').value;
+        
+        fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password, phone }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('register-form').classList.add('hidden');
+                document.getElementById('otp-form').classList.remove('hidden');
+            } else {
+                alert('Registration failed: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred during registration');
+        });
+    });
+    // In /api/register endpoint
+const crypto = require('crypto');
+
+app.post('/api/register', async (req, res) => {
+  try {
+    // ... existing user checks ...
+    
+    const user = {
+      // ... other fields ...
+      otpSecret: crypto.randomBytes(32).toString('base64') // ← Dynamic generation
+    };
+
+    // ... send OTP email ...
+  } catch (error) {
+    // ... error handling ...
+  }
+});
+
+    // Resend OTP
+    document.getElementById('resend-otp').addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('register-email').value;
+        
+        fetch('/api/resend-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('New OTP sent to your email!');
+            } else {
+                alert('Failed to resend OTP: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while resending OTP');
+        });
+    });
+
+    // Existing form submissions (login, forgot password)
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    
+    fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Login successful!');
+            // Redirect or show home screen
+            window.location.href = "/dashboard"; // or any route after login
+        } else {
+            alert('Login failed: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Login Error:', error);
+        alert('An error occurred during login');
+    });
+});
+
+
+document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('forgot-email').value;
+    
+    fetch('/api/forgot-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Password reset link sent to your email.');
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Forgot Password Error:', error);
+        alert('An error occurred while requesting password reset');
+    });
+});
+
+        
+
+        // Form submissions
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Login successful!');
+                    // Redirect to dashboard or home page
+                } else {
+                    alert('Login failed: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during login');
+            });
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const phone = document.getElementById('register-phone').value;
+            
+            fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password, phone }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Registration successful! Please login.');
+                    document.getElementById('login-form').classList.remove('hidden');
+                    document.getElementById('register-form').classList.add('hidden');
+                } else {
+                    alert('Registration failed: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during registration');
+            });
+        });
+
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgot-email').value;
+            
+            fetch('/api/forgot-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Password reset link sent to your email!');
+                    document.getElementById('login-form').classList.remove('hidden');
+                    document.getElementById('forgot-password-form').classList.add('hidden');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred');
+            });
+        });
+    </script>
+</body>
+</html>

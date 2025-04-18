@@ -1,0 +1,145 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+#hero {
+  height: 100vh;
+  background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+#hero .overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 3rem;
+  border-radius: 10px;
+}
+
+#hero h1 {
+  font-size: 4rem;
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffe0;
+  animation: glow 2s infinite alternate;
+}
+
+#hero p {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+/* Parallax Section */
+.parallax {
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1350&q=80') center/cover fixed no-repeat;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.parallax h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.parallax p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Features Section */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 2rem;
+}
+
+.feature {
+  background: #1e1e1e;
+  border-radius: 15px;
+  padding: 2rem;
+  flex: 1 1 300px;
+  text-align: center;
+  box-shadow: 0 0 10px #00ffe0;
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: scale(1.05);
+}
+
+/* CTA */
+.cta {
+  background: linear-gradient(135deg, #00ffe0, #a100ff);
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #0f0f0f;
+}
+
+.btn-glow {
+  background: #0f0f0f;
+  color: #00ffe0;
+  border: 2px solid #00ffe0;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.btn-glow:hover {
+  background: #00ffe0;
+  color: #0f0f0f;
+  box-shadow: 0 0 20px #00ffe0;
+}
+
+/* Animations */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #00ffe0;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffe0, 0 0 30px #00ffe0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 2.5rem;
+  }
+  .features {
+    flex-direction: column;
+  }
+}

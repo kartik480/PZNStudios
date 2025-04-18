@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>#PZN Studios</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .nav-box {
+      background-color: #e61d1d !important;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .nav-box a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 1rem;
+    }
+
+    .main-content {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .studio-name {
+      font-size: 6vw;
+      font-weight: bold;
+      position: absolute;
+      display: flex;
+      gap: 10px;
+      text-align: left;
+      width: 100%;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    #typing::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .background-logo-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+
+    .background-logo {
+      width: 40vw;
+      max-width: 500px;
+      height: auto;
+      animation: logoPulse 12s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+      0% { transform: scale(1); }
+      25% { transform: scale(0.6); }
+      50% { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
+
+    .hud {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80vw;
+      max-width: 600px;
+      height: 80vw;
+      max-height: 600px;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.4;
+      animation: hudPulse 12s ease-in-out infinite;
+    }
+
+    @keyframes hudPulse {
+      0%, 20% { opacity: 0; }
+      25%, 40% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .circle {
+      position: absolute;
+      border: 1px dashed #00ffff;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: rotate 10s linear infinite;
+    }
+
+    .circle:nth-child(1) {
+      width: 50%;
+      height: 50%;
+      top: 25%;
+      left: 25%;
+      animation-duration: 12s;
+    }
+
+    .circle:nth-child(2) {
+      width: 66%;
+      height: 66%;
+      top: 17%;
+      left: 17%;
+      animation-duration: 20s;
+    }
+
+    .circle:nth-child(3) {
+      width: 83%;
+      height: 83%;
+      top: 8.5%;
+      left: 8.5%;
+      animation-duration: 30s;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hud-text {
+      position: absolute;
+      color: #00ffff;
+      font-size: 1vw;
+      max-font-size: 14px;
+      opacity: 0.5;
+      white-space: nowrap;
+    }
+
+    .hud-text:nth-child(4) { top: 20%; left: 55%; }
+    .hud-text:nth-child(5) { top: 65%; left: 35%; }
+    .hud-text:nth-child(6) { top: 40%; left: 80%; }
+    .hud-text:nth-child(7) { top: 75%; left: 70%; }
+
+    .description-box {
+      background-color: #e61d1d;
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+      font-family: "Winky Rough", sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .para {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* New image + text section */
+    .image-text-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 200px;
+      padding: 60px 20px;
+      flex-wrap: wrap;
+      position: relative;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .image-text-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .image-text-section img {
+      width: 700px;
+      max-width: 90vw;
+      height: 400px;
+      border-radius: 8px;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      object-fit: cover;
+    }
+
+    .image-text-content {
+      max-width: 600px;
+      font-size: 1.1rem;
+    }
+
+    .image-glow {
+      position: absolute;
+      width: 720px;
+      height: 420px;
+      max-width: calc(-40vw + 20px);
+      max-height: calc(400px + 20px);
+      background: rgba(230, 29, 29, 0.3);
+      border-radius: 12px;
+      filter: blur(20px);
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Alternate layout for even sections */
+    .image-text-section.alternate {
+      flex-direction: row-reverse;
+    }
+
+    /* New info box section - Added at bottom */
+    .info-box {
+      background-color: #111;
+      color: white;
+      padding: 80px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .info-logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .society-name {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e61d1d;
+      text-align: center;
+    }
+
+    .info-content {
+      flex: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      min-width: 300px;
+    }
+
+    .info-column {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .info-heading {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #e61d1d;
+      border-bottom: 2px solid #e61d1d;
+      padding-bottom: 10px;
+    }
+
+    .info-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-box a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+    .info-list li {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .studio-name {
+        font-size: 9vw;
+        padding-top: 20px;
+      }
+
+      .nav-box {
+        flex-direction: column;
+        padding: 10px 15px;
+        gap: 10px;
+      }
+      .nav-box a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+      .nav-box a {
+        margin-left: 10px;
+        font-size: 0.95rem;
+      }
+
+      .main-content {
+        padding: 0 20px;
+      }
+
+      .background-logo {
+        width: 60vw;
+      }
+
+      .hud {
+        width: 90vw;
+        height: 90vw;
+      }
+
+      .circle:nth-child(1) { width: 50%; height: 50%; top: 25%; left: 25%; }
+      .circle:nth-child(2) { width: 70%; height: 70%; top: 15%; left: 15%; }
+      .circle:nth-child(3) { width: 85%; height: 85%; top: 7.5%; left: 7.5%; }
+
+      .hud-text {
+        font-size: 3.5vw;
+      }
+
+      .image-text-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+      }
+      
+      .image-text-section.alternate {
+        flex-direction: column;
+      }
+      
+      .info-box {
+        padding: 40px 20px;
+      }
+      
+      .logo-section, .info-content {
+        min-width: 100%;
+      }
+      
+      .info-column {
+        min-width: 100%;
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div class="nav-box">
+    <div></div>
+    <div>
+      <a href="./PZNStudios.html">Home</a>
+      <a href="./OurProjects.html">Projects</a>
+      <a href="./OurWebsiteTemplate.html">WebTemplate</a>
+      <a href="./AboutUs.html">About Us</a>
+      <a href="public/Contact.html">Contact</a>
+    </div>
+  </div>
+
+  <!-- Main Parallax Section -->
+  <div class="main-content">
+    <div class="studio-name" id="studioName">
+      <span>#</span>
+      <span id="typing"></span>
+      <span style="color: red;">Studios..</span>
+    </div>
+
+    <div class="background-logo-container" id="logoContainer">
+      <img src="logo.png" alt="Logo" class="background-logo" />
+    </div>
+
+    <div class="hud" id="hudLayer">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="hud-text">ANDROID MAKING</div>
+      <div class="hud-text">ANIME CLOTHING</div>
+      <div class="hud-text">AI</div>
+      <div class="hud-text">WEBSITE MAKING</div>
+    </div>
+  </div>
+
+  <!-- Red Box Description Section -->
+  <div class="description-box">
+    <h2>About US..!</h2>
+    <p> We're a creative and tech-driven studio that blends innovation with style. Whether you're looking for custom Android apps, modern websites, or unique clothing designs, we've got you covered.<br>
+
+      Our team is passionate about building smart digital solutions and eye-catching fashion concepts that stand out. From startups to established brands, we help bring your ideas to life—both online and offline.<br><br><br>
+      
+      <p class="para">What We Do:</p><br>
+      
+      Custom Android App Development,
+      
+      Website Design & Development,
+
+      
+      Unique Clothing & Apparel Design etc., and many more to come soon.</p>
+  </div>
+
+  <!-- First Image and Description Section -->
+  <div class="image-text-section" id="imageSection1">
+    <div class="image-glow" id="imageGlow1"></div>
+    <img src="design1.jpg" alt="Studio Work" id="designImage1" />
+    <div class="image-text-content">
+      <h3>Explore Our World</h3>
+      <p>At PZN Studios, we merge creativity with technology. Here's a glimpse of what drives our passion: innovation, design, and dedication to pushing boundaries—one pixel and one stitch at a time.</p>
+    </div>
+  </div>
+
+  <!-- Second Image and Description Section -->
+  <div class="image-text-section alternate" id="imageSection2">
+    <div class="image-glow" id="imageGlow2"></div>
+    <img src="des2.png" alt="Studio Projects" id="designImage2" />
+    <div class="image-text-content">
+      <h3>Our Creative Process</h3>
+      <p>Every project at PZN Studios begins with a spark of imagination. We combine cutting-edge technology with artistic vision to create solutions that are not just functional but visually stunning.</p>
+    </div>
+  </div>
+
+  <!-- Third Image and Description Section -->
+  <div class="image-text-section" id="imageSection3">
+    <div class="image-glow" id="imageGlow3"></div>
+    <img src="des3.png" alt="Studio Team" id="designImage3" />
+    <div class="image-text-content">
+      <h3>Meet The Team</h3>
+      <p>Our diverse team of designers, developers, and creatives work together to bring your vision to life. Collaboration is at the heart of everything we do at PZN Studios.</p>
+    </div>
+  </div>
+
+  <!-- Fourth Image and Description Section -->
+  <div class="image-text-section alternate" id="imageSection4">
+    <div class="image-glow" id="imageGlow4"></div>
+    <img src="des4.jpg" alt="Studio Showcase" id="designImage4" />
+    <div class="image-text-content">
+      <h3>Our Latest Projects</h3>
+      <p>Explore our portfolio of recent work that showcases our range of capabilities across digital and physical design. Each project represents our commitment to quality and innovation.</p>
+    </div>
+  </div>
+
+  <!-- New Info Box Section - Added at bottom as requested -->
+  <div class="info-box">
+    <div class="logo-section">
+      <img src="logo.png" alt="PZN Logo" class="info-logo" />
+      <div class="society-name">#PZNSociety</div>
+    </div>
+    
+    <div class="info-content">
+      <div class="info-column">
+        <h3 class="info-heading">Our Services</h3>
+        <ul class="info-list">
+          <li>Website Development</li>
+          <li>Android App Development</li>
+          <li>Clothing Brand Design.</li>
+          
+          
+        </ul>
+      </div>
+      
+      <div class="info-column">
+        <h3 class="info-heading">Contact Us</h3>
+        <ul class="info-list">
+          <li>Phone: 9398907446</li>
+          <li>Email: basireddykarthik551@gmail.com</li>
+          <li>Address: Sanjana'sCourtyard , Kandlakoya , medchal.</li>
+          <li>Hours: Mon-Fri 10AM-6PM</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typing Effect -->
+  <script>
+    const typingElement = document.getElementById("typing");
+    const texts = ["PZN", "ProZoneNinja"];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      const currentText = texts[textIndex];
+      const displayedText = currentText.substring(0, charIndex);
+      typingElement.textContent = displayedText;
+
+      if (!isDeleting && charIndex < currentText.length) {
+        charIndex++;
+        setTimeout(typeEffect, 150);
+      } else if (isDeleting && charIndex > 0) {
+        charIndex--;
+        setTimeout(typeEffect, 100);
+      } else {
+        if (!isDeleting) {
+          isDeleting = true;
+          setTimeout(typeEffect, 4000);
+        } else {
+          isDeleting = false;
+          textIndex = (textIndex + 1) % texts.length;
+          setTimeout(typeEffect, 500);
+        }
+      }
+    }
+
+    typeEffect();
+  </script>
+
+  <!-- Parallax Scroll Effect -->
+  <script>
+    const logoContainer = document.getElementById('logoContainer');
+    const studioName = document.getElementById('studioName');
+    const hudLayer = document.getElementById('hudLayer');
+    
+    // All image sections
+    const imageSections = [
+      { 
+        section: document.getElementById('imageSection1'),
+        image: document.getElementById('designImage1'),
+        glow: document.getElementById('imageGlow1')
+      },
+      { 
+        section: document.getElementById('imageSection2'),
+        image: document.getElementById('designImage2'),
+        glow: document.getElementById('imageGlow2')
+      },
+      { 
+        section: document.getElementById('imageSection3'),
+        image: document.getElementById('designImage3'),
+        glow: document.getElementById('imageGlow3')
+      },
+      { 
+        section: document.getElementById('imageSection4'),
+        image: document.getElementById('designImage4'),
+        glow: document.getElementById('imageGlow4')
+      }
+    ];
+
+    function checkVisibility() {
+      const windowHeight = window.innerHeight;
+      
+      imageSections.forEach(sectionData => {
+        const sectionPosition = sectionData.section.getBoundingClientRect();
+        
+        if (sectionPosition.top < windowHeight * 0.75 && sectionPosition.bottom > 0) {
+          const distanceFromTop = windowHeight - sectionPosition.top;
+          const opacity = Math.min(1, distanceFromTop / (windowHeight * 0.5));
+          
+          sectionData.glow.style.opacity = opacity;
+          sectionData.image.style.transform = `scale(${1 + opacity * 0.05})`;
+          sectionData.image.style.boxShadow = `0 0 ${opacity * 30}px rgba(230, 29, 29, ${opacity * 0.7})`;
+          sectionData.section.classList.add('visible');
+        } else {
+          sectionData.glow.style.opacity = 0;
+          sectionData.image.style.transform = 'scale(1)';
+          sectionData.image.style.boxShadow = 'none';
+        }
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      logoContainer.style.transform = `translate(-50%, calc(-50% - ${scrollY * 0.4}px))`;
+      hudLayer.style.transform = `translate(-50%, calc(-50% - ${scrollY * 0.6}px))`;
+      studioName.style.transform = `translateY(${scrollY * 0.3}px)`;
+      
+      checkVisibility();
+    });
+
+    // Initial check when page loads
+    window.addEventListener('load', checkVisibility);
+  </script>
+
+</body>
+</html>

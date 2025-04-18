@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #fff;
+  }
+  
+  header {
+    background: #111;
+    color: #fff;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .project-card {
+    background: #e0e0e0;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  input, textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Glow Button */
+  .glow-button {
+    position: relative;
+    background: #222;
+    color: white;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .glow-button::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff0000);
+    background-size: 400%;
+    animation: glow 5s linear infinite;
+    z-index: -1;
+    filter: blur(15px);
+  }
+  
+  @keyframes glow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Floating Animation */
+  .floating-element {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Parallax Layers */
+  .parallax-container {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 8px;
+    position: relative;
+  }
+  
+  .parallax-layer {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .far-bg {
+    transform: translateZ(-6px) scale(1.75);
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+  }
+  
+  .mid-bg {
+    transform: translateZ(-3px) scale(1.375);
+    background-image: url('https://images.unsplash.com/photo-1517832207067-4db24a2ae47c');
+  }
+  
+  .near-bg {
+    transform: translateZ(-1px) scale(1.125);
+    background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97');
+  }
+  
+  .content {
+    position: relative;
+    transform: translateZ(0);
+    padding: 50vh 10% 10vh;
+    background-color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+  }
+  
+  /* Footer */
+  footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+  

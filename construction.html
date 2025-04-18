@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BuildMaster Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    header.hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                  url('https://cdn.pixabay.com/photo/2015/09/18/20/58/architecture-944992_1280.jpg') center/cover;
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: #00ffe0;
+      text-shadow: 0 0 10px #00ffe0, 0 0 30px #00ffe0;
+      animation: pulse 2s infinite;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, #00ffe0, #005bff);
+      color: black;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffe0aa;
+      cursor: pointer;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #005bff, #00ffe0);
+    }
+
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+      border-radius: 1rem;
+      margin: 3rem 2rem;
+      box-shadow: 0 0 20px rgba(0,255,255,0.2);
+      transform: scale(1);
+      transition: all 0.5s ease-in-out;
+    }
+
+    section:hover {
+      transform: scale(1.02) rotateZ(1deg);
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: #00ffe0;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #111, #222);
+      border: 2px solid #00ffe0;
+      padding: 2rem;
+      width: 220px;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0,255,255,0.4);
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover {
+      transform: perspective(600px) rotateY(10deg);
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .img-box {
+      width: 180px;
+      height: 180px;
+      background: #333;
+      border-radius: 1rem;
+      font-size: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px #00ffe088;
+      transition: transform 0.5s;
+    }
+
+    .img-box:hover {
+      transform: rotateZ(10deg) scale(1.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input, textarea {
+      padding: 1rem;
+      border: 1px solid #00ffe0;
+      background: #111;
+      color: #fff;
+      border-radius: 0.5rem;
+    }
+
+    button[type="submit"] {
+      background: #00ffe0;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #aaa;
+      background: #000;
+    }
+
+    blockquote {
+      font-style: italic;
+      color: #00ffe0;
+      font-size: 1.2rem;
+    }
+
+    @keyframes pulse {
+      0% { text-shadow: 0 0 10px #00ffe0; }
+      50% { text-shadow: 0 0 30px #00ffe0; }
+      100% { text-shadow: 0 0 10px #00ffe0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>BuildingConst</h1>
+    <p>We Build the Future 🌇 With Power & Style</p>
+    <a href="#services" class="btn">Explore Services</a>
+  </header>
+
+  <section id="services">
+    <h2>🛠️ Our Services</h2>
+    <div class="card-container">
+      <div class="card">🏗️ Construction</div>
+      <div class="card">🔧 Renovation</div>
+      <div class="card">🎨 Interior Design</div>
+      <div class="card">🌆 Commercial Projects</div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <h2>🏙️ Our Projects</h2>
+    <div class="gallery">
+      <div class="img-box">🏢</div>
+      <div class="img-box">🏠</div>
+      <div class="img-box">🏬</div>
+      <div class="img-box">🏭</div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <h2>💬 Testimonials</h2>
+    <blockquote>“Stunning designs, flawless execution. 10/10!”</blockquote>
+  </section>
+
+  <section id="contact">
+    <h2>📞 Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <textarea placeholder="Your message..." required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 BuildMaster Pro — All rights reserved</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameZone Parallax Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #111;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #111;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    header h1 {
+      color: #0ff;
+      font-size: 2rem;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #0ff;
+    }
+
+    section {
+      padding: 80px 40px;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1625772452859-d8e208bbc7ae?auto=format&fit=crop&w=1740&q=80') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-content {
+      z-index: 10;
+      text-align: center;
+    }
+
+    .hero-content h2 {
+      font-size: 4rem;
+      text-shadow: 0 0 15px #0ff;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #0ff;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    .section-dark {
+      background-color: #1a1a1a;
+    }
+
+    .section h3 {
+      font-size: 2.5rem;
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .game-card h4 {
+      padding: 12px;
+      color: #0ff;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-box {
+      background: #222;
+      padding: 30px;
+      border-radius: 8px;
+      width: 200px;
+    }
+
+    .stat-box h4 {
+      font-size: 2rem;
+      color: #0ff;
+    }
+
+    .stat-box p {
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 30px;
+    }
+
+    footer p {
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>GameZone</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#games">Games</a>
+      <a href="#stats">Stats</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h2>GameZone Universe</h2>
+      <p>Where Pro Gamers Rise</p>
+      <button class="btn">Join The Battle</button>
+    </div>
+  </section>
+
+  <section class="section section-dark" id="games">
+    <h3>🎮 Popular Titles</h3>
+    <div class="games-grid">
+      <div class="game-card">
+        <img src="https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/f65f6b5db6da7d53fc2d6cc8cb871174.png" alt="Game 1">
+        <h4>Shadow Protocol</h4>
+      </div>
+      <div class="game-card">
+        <img src="https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/d1fa4cf2858bbd93cd4f3d8e5d979a60.png" alt="Game 2">
+        <h4>Rogue Striker</h4>
+      </div>
+      <div class="game-card">
+        <img src="https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/8b0b2a1286b4c53a385493b3de6145b4.png" alt="Game 3">
+        <h4>Blast Orbit</h4>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="stats">
+    <h3>📊 GameZone Stats</h3>
+    <div class="stats">
+      <div class="stat-box">
+        <h4 id="players">0</h4>
+        <p>Active Players</p>
+      </div>
+      <div class="stat-box">
+        <h4 id="downloads">0</h4>
+        <p>Downloads</p>
+      </div>
+      <div class="stat-box">
+        <h4 id="tournaments">0</h4>
+        <p>Monthly Tournaments</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark" id="contact">
+    <h3>📬 Contact Us</h3>
+    <p>Email: support@gamezone.com</p>
+    <p>Discord: discord.gg/gamezone</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 GameZone. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Counter animation
+    function animateValue(id, start, end, duration) {
+      let range = end - start;
+      let current = start;
+      let increment = end > start ? 1 : -1;
+      let stepTime = Math.abs(Math.floor(duration / range));
+      const obj = document.getElementById(id);
+      const timer = setInterval(() => {
+        current += increment;
+        obj.textContent = current.toLocaleString();
+        if (current == end) clearInterval(timer);
+      }, stepTime);
+    }
+
+    window.onload = function () {
+      animateValue("players", 0, 185000, 1500);
+      animateValue("downloads", 0, 340000, 1500);
+      animateValue("tournaments", 0, 120, 1500);
+    };
+  </script>
+</body>
+</html>
