@@ -54,6 +54,8 @@
       width: 100%;
       flex-wrap: wrap;
       z-index: 2;
+     
+      
     }
 
     #typing::after {
@@ -304,6 +306,7 @@
       .studio-name {
         font-size: 9vw;
         padding-top: 20px;
+        top: 30%;
       }
 
       .nav-box {
@@ -341,11 +344,14 @@
 
       .background-logo {
         width: 60vw;
+        position: relative;
+        top: -130px
       }
 
       .hud {
         width: 90vw;
         height: 90vw;
+        top: 35%;
       }
 
       .circle:nth-child(1) { width: 50%; height: 50%; top: 25%; left: 25%; }
@@ -590,7 +596,7 @@
         } else {
           sectionData.glow.style.opacity = 0;
           sectionData.image.style.transform = 'scale(1)';
-          sectionData.image.style.boxShadow = 'none';
+          sectionData.image.style.boxShadow = 'none';       
         }
       });
     }
