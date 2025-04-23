@@ -26,11 +26,42 @@
       flex-wrap: wrap;
     }
 
+    .nav-links {
+      display: flex;
+      transition: all 0.3s ease;
+    }
+
     .nav-box a {
       color: white;
       text-decoration: none;
       margin-left: 20px;
       font-size: 1rem;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .nav-box a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Hamburger menu styles */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
     }
 
     .main-content {
@@ -54,8 +85,6 @@
       width: 100%;
       flex-wrap: wrap;
       z-index: 2;
-     
-      
     }
 
     #typing::after {
@@ -292,10 +321,6 @@
       padding: 0;
       margin: 0;
     }
-    .nav-box a:hover {
-            background-color: #ddd;
-            color: black;
-        }
 
     .info-list li {
       margin-bottom: 15px;
@@ -306,37 +331,57 @@
       .studio-name {
         font-size: 9vw;
         padding-top: 20px;
-        top: 30%;
       }
 
       .nav-box {
-    flex-direction: column;
-    padding: 10px;
-    gap: 5px;
-  }
-  .nav-box > div {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-  }
-      .nav-box a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+        padding: 10px 15px;
+      }
 
-        .nav-box a {
-    margin: 5px;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 4px;
-    text-align: center;
-    flex: 1 0 auto;
-    min-width: 120px;
-    box-sizing: border-box;
-  }
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #e61d1d;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 15px;
+        clip-path: circle(0px at 90% -10%);
+        -webkit-clip-path: circle(0px at 90% -10%);
+        transition: all 0.5s ease-out;
+        pointer-events: none;
+      }
+
+      .nav-links.active {
+        clip-path: circle(1000px at 90% -10%);
+        -webkit-clip-path: circle(1000px at 90% -10%);
+        pointer-events: all;
+      }
+
+      .nav-box a {
+        margin-left: 0;
+        padding: 10px 20px;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Hamburger animation */
+      .hamburger.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
 
       .main-content {
         padding: 0 20px;
@@ -344,14 +389,11 @@
 
       .background-logo {
         width: 60vw;
-        position: relative;
-        top: -125px
       }
 
       .hud {
         width: 90vw;
         height: 90vw;
-        top: 35%;
       }
 
       .circle:nth-child(1) { width: 50%; height: 50%; top: 25%; left: 25%; }
@@ -394,10 +436,15 @@
 
   <!-- Top Navigation -->
   <div class="nav-box">
-    <div></div>
-    <div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links">
       <a href="./PZNStudios.html">Home</a>
       <a href="./OurProjects.html">Projects</a>
+      <a href="./OurServices.html">Services</a>
       <a href="./OurWebsiteTemplate.html">WebTemplate</a>
       <a href="./AboutUs.html">About Us</a>
       <a href="public/Contact.html">Contact</a>
@@ -498,8 +545,6 @@
           <li>Website Development</li>
           <li>Android App Development</li>
           <li>Clothing Brand Design.</li>
-          
-          
         </ul>
       </div>
       
@@ -596,7 +641,7 @@
         } else {
           sectionData.glow.style.opacity = 0;
           sectionData.image.style.transform = 'scale(1)';
-          sectionData.image.style.boxShadow = 'none';       
+          sectionData.image.style.boxShadow = 'none';
         }
       });
     }
@@ -612,6 +657,25 @@
 
     // Initial check when page loads
     window.addEventListener('load', checkVisibility);
+  </script>
+
+  <!-- Hamburger Menu Toggle -->
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
   </script>
 
 </body>

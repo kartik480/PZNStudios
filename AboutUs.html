@@ -19,27 +19,66 @@
             width: 100%;
             background-color: #e61d1d;
             display: flex;
-            justify-content: center; /* Center by default (mobile) */
+            justify-content: space-between;
             align-items: center;
-            height: auto;
+            height: 60px;
             position: relative;
-            z-index: 1;
-            padding: 10px 0;
-            flex-wrap: wrap;
+            z-index: 1000;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .nav-links {
+            display: flex;
+            transition: all 0.3s ease;
         }
 
         .top-border a {
             color: white;
             text-decoration: none;
-            margin: 5px 10px;
+            margin: 0 15px;
             font-size: 1rem;
             font-family: 'Arial', sans-serif;
-            transition: color 0.3s ease;
-            padding: 5px 0;
+            transition: all 0.3s ease;
+            padding: 10px 0;
         }
 
         .top-border a:hover {
             color: black;
+        }
+
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            position: relative;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 24px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 6px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 12px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 18px;
         }
 
         .content {
@@ -130,16 +169,61 @@
             }
         }
 
-        /* Tablet Styles (min-width: 600px) */
-        @media (min-width: 600px) {
-            .top-border {
-                height: 50px;
-                padding: 0;
-                flex-wrap: nowrap;
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #e61d1d;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                clip-path: circle(0px at -10% 10%);
+                -webkit-clip-path: circle(0px at -10% 10%);
+                transition: all 0.5s ease-out;
+                pointer-events: none;
+            }
+
+            .nav-links.active {
+                clip-path: circle(1500px at -10% 10%);
+                -webkit-clip-path: circle(1500px at -10% 10%);
+                pointer-events: all;
             }
 
             .top-border a {
-                margin: 0 20px;
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+                margin: 0;
+            }
+
+            /* Hamburger animation */
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(6px) rotate(45deg);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-6px) rotate(-45deg);
+            }
+        }
+
+        /* Tablet Styles (min-width: 600px) */
+        @media (min-width: 600px) {
+            .top-border {
+                padding: 0 30px;
+            }
+
+            .top-border a {
                 font-size: 1.1rem;
             }
 
@@ -152,7 +236,7 @@
         /* Desktop Styles (min-width: 900px) */
         @media (min-width: 900px) {
             .top-border {
-                justify-content: flex-end; /* Align nav to right on desktop */
+                justify-content: flex-end;
                 padding-right: 50px;
             }
 
@@ -182,14 +266,23 @@
 </head>
 <body>
     <div class="floating-icons" id="floatingIcons"></div>
+    
+    <!-- Navigation with Hamburger Menu -->
     <div class="top-border">
-        <a href="./PZNStudios.html">Home</a>
-        <a href="./OurProjects.html">Projects</a>
-        <a href="./OurWebsiteTemplate.html">WebTemplate</a>
-        <a href="./AboutUs.html">About Us</a>
-        
-        <a href="./public/Contact.html">Contact</a>
+        <button class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links">
+            <a href="./PZNStudios.html">Home</a>
+            <a href="./OurProjects.html">Projects</a>
+            <a href="./OurWebsiteTemplate.html">WebTemplate</a>
+            <a href="./AboutUs.html">About Us</a>
+            <a href="./public/Contact.html">Contact</a>
+        </div>
     </div>
+    
     <div class="content">
         <h1>About Us!</h1>
         <p style="font-family:cursive;">
@@ -280,6 +373,31 @@
                 container.appendChild(icon);
             }
         }
+        
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // Toggle overflow on body when menu is open
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
         
         // Initial creation
         createIcons();
